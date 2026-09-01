@@ -1,7 +1,8 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
-import "./App.css";
+import "./style/App.css";
+import Nav from "./components/nav/Nav"
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <main className="container">
+      <Nav />
       <h1>Welcome to Tauri + React</h1>
 
       <div className="row">
