@@ -21,3 +21,16 @@ npm run tauri dev
 
 # Production Build
 npm run tauri build
+
+## tauri installieren
+
+Befehl oder App laden
+```
+winget install Rustlang.Rustup
+https://rustup.rs/
+´´´
+
+Env setzen
+```
+$env:Path += ";$env:USERPROFILE\.cargo\bin"
+```
