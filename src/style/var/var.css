@@ -1,3 +1,6 @@
 :root {
     --transition-default: .3s;
+    --border-radius-default: 24px;
+    --border-radius-small: 12px;
+    --border-radius-round: 48px;
 }
