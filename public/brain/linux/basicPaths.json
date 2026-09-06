@@ -1,0 +1,10 @@
+{
+    "basicPaths": {
+        "LV2": "/usr/lib/lv2/",
+        "VST2": "/usr/lib/vst/",
+        "VST3": "/usr/lib/vst3/",
+        "CLAP": "/usr/lib/clap"
+    },
+    "userBasicPaths": {
+    }
+}

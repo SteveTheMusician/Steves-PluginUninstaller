@@ -1,7 +1,7 @@
-export default function ContentFrame(frameName) {
+export default function ContentFrame({frameName, children}) {
     return(
         <div id={frameName} className="contentFrame">
-            TestFrame
+            {children}
         </div>
     )
 }

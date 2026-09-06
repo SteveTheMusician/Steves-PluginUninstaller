@@ -1,0 +1,11 @@
+{
+    "basicPaths": {
+        "VST": "C:/Program Files (x86)/VstPlugins",
+        "VST2": "C:/Program Files/Common Files/VST2",
+        "VST3": "C:/Program Files/Common Files/VST3"
+    },
+    "userBasicPaths": {
+        "VST2": "F:/VST2",
+        "A Custom Folder": "H:/VST PlugIns/VST Apps"
+    }
+}

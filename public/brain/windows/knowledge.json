@@ -1,0 +1,57 @@
+{
+    "knownPaths": {
+        "Steinberg VST Ordner": "C:/Program Files/Steinberg/VstPlugins"
+    },
+    "knownApps": {
+        "Fresh Air": {
+            "icon": "",
+            "useBasicPaths": true,
+            "hasCustomFolder": true,
+            "hasUninstaller": false,
+            "hasStandAlone": false,
+            "appCustomFolders": {
+                "VST3Path":"/Slate Digital"
+            },
+            "appUninstallerPath": "",
+            "appStandAlonePaths": {}
+        },
+        "LABS": {
+            "icon": "",
+            "useBasicPaths": true,
+            "hasCustomFolder": true,
+            "hasUninstaller": false,
+            "hasStandAlone": false,
+            "appCustomFolders": {
+                "VST3Path":"/LABS.vst3"
+            },
+            "appUninstallerPath": "",
+            "appStandAlonePaths": {}
+        },
+        "Sylenth1": {
+            "icon": "",
+            "useBasicPaths": true,
+            "hasCustomFolder": true,
+            "hasUninstaller": true,
+            "hasStandAlone": false,
+            "appCustomFolders": {
+                "documentsPath": "/Sylenth1"
+            },
+            "appUninstallerPath": "C:/Program Files/LennarDigital/Sylenth1",
+            "appStandAlonePaths": {}
+        },
+        "HertzDrums": {
+            "icon": "",
+            "useBasicPaths": false,
+            "hasCustomFolder": true,
+            "hasUninstaller": false,
+            "hasStandAlone": true,
+            "appCustomFolders": {
+                "VST3Path": "/Hertz Instruments/Hertz Drums"
+            },
+            "appUninstallerPath": "",
+            "appStandAlonePaths": {
+                "cPath": "C:/Program Files/Hertz Instruments/Hertz Drums"
+            }
+        }
+    }
+}

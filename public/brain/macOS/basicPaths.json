@@ -1,0 +1,9 @@
+{
+    "basicPaths": {
+        "AU": "/Library/Audio/Plug-Ins/Components/",
+        "VST": "/Library/Audio/Plug-Ins/VST",
+        "VST3": "/Library/Audio/Plug-Ins/Components/"
+    },
+    "userBasicPaths": {
+    }
+}
