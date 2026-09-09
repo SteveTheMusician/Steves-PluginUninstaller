@@ -4,7 +4,7 @@
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 24px;
   font-weight: 400;
   font-synthesis: none;
@@ -33,6 +33,29 @@ button {
   cursor: pointer;
 }
 
+button:active {
+  outline: 1px solid var(--color-highlight);
+}
+
+input {
+  border: 0px;
+  outline: 0px;
+  background-color: var(--color-main);
+  color: var(--color-font);
+  padding: 12px;
+  border-radius: var(--border-radius-small);
+  font-size: 14px;
+}
+
+input:hover {
+  color: var(--color-font);
+}
+
+input::placeholder {
+    color: var(--color-font-subtext);
+    opacity: 0.6;
+}
+
 nav {
   width: calc(100% - 24px);
   height: 64px;
@@ -40,7 +63,7 @@ nav {
   top: 0;
   left: 0;
   background-color: var(--color-main);
-  border-bottom: 1px solid var(--color-second);
+  /* border-bottom: 1px solid var(--color-second); */
   z-index: 100;
   overflow: hidden;
   justify-content: space-between;
@@ -176,9 +199,9 @@ svg {
 
 .box {
   padding: 24px;
-  outline: 1px solid var(--color-third);
+  /* outline: 1px solid var(--color-third); */
   border-radius: var(--border-radius-small);
-  /* background-color: var(--color-third); */
+  background-color: var(--color-third);
 }
 
 .box-manualUninstall-Input {
@@ -191,4 +214,14 @@ svg {
 
 .box-manualUninstall-actions {
   grid-area: 2 / 2 / 3 / 3;
+}
+
+.inputData-container {
+  width: 100%;
+  height: calc(100% - 24px);
+}
+
+.input-size--large {
+  width: calc(100% - 12px);
+  max-width: 242px;
 }
