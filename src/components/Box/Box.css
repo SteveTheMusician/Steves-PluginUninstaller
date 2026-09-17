@@ -1,0 +1,9 @@
+.box-big--hidden {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+.box-left--hidden {
+  transform: scaleX(0);
+  opacity: 0;
+}

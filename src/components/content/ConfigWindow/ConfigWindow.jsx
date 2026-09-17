@@ -7,7 +7,7 @@ export default function ConfigWindow({selectedNavItem,setSelectedNavItem,showApp
         showAppWindow = true
     }
     return(
-        <div className={classNames('appWindow',showAppWindow? '': 'appWindow--hidden')}>
+        <div className={classNames('appWindow',showAppWindow? '': 'dNone')}>
             <ContentFrame>Config</ContentFrame>            
         </div>
     )

@@ -8,7 +8,7 @@ export default function InstalledPluginsWindow({selectedNavItem,setSelectedNavIt
         showAppWindow = true
     }
     return(
-        <div className={classNames('appWindow',showAppWindow? '': 'appWindow--hidden')}>
+        <div className={classNames('appWindow',showAppWindow? '': 'dNone')}>
             <ContentFrame> Installed Plugin Window</ContentFrame>            
         </div>
     )

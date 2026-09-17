@@ -7,7 +7,7 @@ export default function BrainWindow({selectedNavItem,setSelectedNavItem,showAppW
         showAppWindow = true
     }
     return(
-        <div className={classNames('appWindow',showAppWindow? '': 'appWindow--hidden')}>
+        <div className={classNames('appWindow',showAppWindow? '': 'dNone')}>
             <ContentFrame>Brain</ContentFrame>            
         </div>
     )

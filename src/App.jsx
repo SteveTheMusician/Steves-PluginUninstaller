@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import "./style/App.css";
+import KnowledgeProvider from './utils/KnowledgeProvider'
 import Nav from "./components/Nav/Nav"
 import InstalledPluginsWindow from "./components/content/InstalledPluginsWindow/InstalledPluginsWindow";
 import ManualUninstallWindow from "./components/content/ManualUninstallWindow/ManualUninstallWindow";
@@ -13,15 +14,17 @@ function App() {
   const [showAppWindow, setShowAppWindow] = useState()
 
   return (
-    <div id="app">
-      <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem}/>
+    <KnowledgeProvider>
+      <div id="app">
+        <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} />
         <main>
-        <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow}/>
-        <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow}/>
-        <BrainWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow}/>
-        <ConfigWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow}/>
+          <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
+          <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
+          <BrainWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
+          <ConfigWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
         </main>
-    </div> 
+      </div>
+    </KnowledgeProvider>
   );
 }
 
