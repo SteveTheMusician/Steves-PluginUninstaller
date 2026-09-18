@@ -1,14 +1,15 @@
 import ContentFrame from "../../contentFrame/contentFrame"
 import classNames from "classnames"
+import Window from '../../Window/Window'
 
 export default function ConfigWindow({selectedNavItem,setSelectedNavItem,showAppWindow}) {
 
-    if(selectedNavItem === 'Config') {
-        showAppWindow = true
-    }
+    const windowLink = "tab_config"
+    const isVisible = showAppWindow === windowLink;
+    
     return(
-        <div className={classNames('appWindow',showAppWindow? '': 'dNone')}>
+        <Window isVisible={isVisible}>
             <ContentFrame>Config</ContentFrame>            
-        </div>
+        </Window>
     )
 }

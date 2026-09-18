@@ -1,15 +1,17 @@
 import ContentFrame from "../../contentFrame/contentFrame"
 import classNames from "classnames"
+import useState from 'react'
+import Window from '../../Window/Window'
 
 
-export default function InstalledPluginsWindow({selectedNavItem,setSelectedNavItem,showAppWindow}) {
+export default function InstalledPluginsWindow({selectedNavItem,setSelectedNavItem,showAppWindow,}) {
 
-    if(selectedNavItem === 'Installed Plugins') {
-        showAppWindow = true
-    }
+    const windowLink = "tab_installedplugins"
+    const isVisible = showAppWindow === windowLink;
+
     return(
-        <div className={classNames('appWindow',showAppWindow? '': 'dNone')}>
+        <Window isVisible={isVisible}>
             <ContentFrame> Installed Plugin Window</ContentFrame>            
-        </div>
+        </Window>
     )
 }

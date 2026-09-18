@@ -1,14 +1,15 @@
 import ContentFrame from "../../contentFrame/contentFrame"
 import classNames from "classnames"
+import Window from '../../Window/Window'
 
 export default function BrainWindow({selectedNavItem,setSelectedNavItem,showAppWindow}) {
 
-    if(selectedNavItem === 'Brain') {
-        showAppWindow = true
-    }
+    const windowLink = "tab_brain"
+    const isVisible = showAppWindow === windowLink;
+    
     return(
-        <div className={classNames('appWindow',showAppWindow? '': 'dNone')}>
-            <ContentFrame>Brain</ContentFrame>            
-        </div>
+        <Window isVisible={isVisible}>
+            <ContentFrame>Apps Brain</ContentFrame>            
+        </Window>
     )
 }

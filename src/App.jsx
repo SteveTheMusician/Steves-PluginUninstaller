@@ -16,7 +16,7 @@ function App() {
   return (
     <KnowledgeProvider>
       <div id="app">
-        <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} />
+        <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowAppWindow={setShowAppWindow}/>
         <main>
           <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
           <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
