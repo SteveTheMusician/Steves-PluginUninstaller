@@ -83,54 +83,6 @@ svg {
   transition: var(--transition-default);
 }
 
-.tabButton {
-  background-color: var(--color-third);
-  color: var(--color-icon-default);
-  padding: 12px 24px;
-  border-radius: var(--border-radius-round);
-  height: 40px;
-}
-
-.tabButton:hover {
-  background-color: var(--color-highlight);
-  color: var(--color-main);
-}
-
-.tabButton.active {
-  background-color: var(--color-active);
-  color: var(--color-main);
-  box-shadow: 0px 0px 12px var(--color-active);
-}
-
-.tabButton svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--color-icon-default);
-}
-
-.tabButton--noBackground, .tabButton--noBackground:active, .tabButton--noBackground:focus {
-  background-color: transparent;
-  box-shadow: unset;
-  outline: none;
-}
-
-.tabButton--noBackground.tabButton.active, .tabButton--noBackground.tabButton.active svg{
-  background-color: transparent;
-  box-shadow: none;
-  fill: var(--color-active);
-  outline: none;
-}
-
-.tabButton--noBackground:hover , .tabButton--noBackground:hover svg{
-  background-color: transparent;
-  fill: var(--color-highlight);
-}
-
-.tabButton .icon-config {
-  width: 40px;
-  height: 40px;
-}
-
 .flex {
     display: flex;
     justify-content: center;
@@ -194,19 +146,4 @@ svg {
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 12px;
   grid-row-gap: 12px;
-}
-
-.inputData-container {
-  width: 100%;
-  height: calc(100% - 24px);
-}
-
-.input-size--large {
-  width: calc(100% - 12px);
-  max-width: 462px;
-  padding: 22px;
-  border: 1px solid #f4f4f4;
-  box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset;
-  background-color: #f4f4f4;
-  border-radius: 100px;
 }

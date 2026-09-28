@@ -1,5 +1,6 @@
 import classNames from 'classnames'
-import Icon from '../Icon/Icon';
+import Icon from '../../Icon/Icon';
+import './Tab.css'
 
 export default function Tab({ isActive, onClick, icon, onlyIcon,noBackground , children }) {
 

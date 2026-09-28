@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import Tab from "../Tab/Tab";
+import Tab from "../molecules/Tab/Tab";
 
 export default function Nav({selectedNavItem,setSelectedNavItem,setShowAppWindow}) {
 
