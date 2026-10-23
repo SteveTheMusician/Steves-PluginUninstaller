@@ -3,10 +3,12 @@ import { invoke } from "@tauri-apps/api/core";
 import "./style/App.css";
 import KnowledgeProvider from './utils/KnowledgeProvider'
 import Nav from "./components/Nav/Nav"
-import InstalledPluginsWindow from "./components/content/InstalledPluginsWindow/InstalledPluginsWindow";
-import ManualUninstallWindow from "./components/content/ManualUninstallWindow/ManualUninstallWindow";
-import BrainWindow from "./components/content/BrainWindow/BrainWindow";
-import ConfigWindow from "./components/content/ConfigWindow/ConfigWindow";
+import { 
+  InstalledPluginsWindow, 
+  ManualUninstallWindow,
+  BrainWindow,
+  ConfigWindow
+} from "./components/content/content.import";
 
 function App() {
 

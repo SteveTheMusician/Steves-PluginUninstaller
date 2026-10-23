@@ -1,0 +1,44 @@
+/* Switch CSS */
+.switch input {
+    width: 0;
+    height: 0;
+    /* position: absolute; */
+    opacity: 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    width: 80px;
+    /* padding: 4px 38px; */
+    /* background-color: #ff0000; */
+}
+
+.switch_slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--border-radius-round);
+    box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset;
+    cursor: pointer;
+}
+
+input:checked+.switch_slider:before{
+    transform: translateX(40px);
+}
+
+.switch_slider:before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    box-shadow: 0px -4px 8px #ffffff,0px 4px 8px #00000033;
+    background-color: var(--color-main);
+    position: absolute;
+    border-radius: var(--border-radius-round);
+    top: 8px;
+    left: 8px;
+    transition: var(--transition-default);
+}

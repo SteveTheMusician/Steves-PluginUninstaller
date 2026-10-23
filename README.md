@@ -34,3 +34,17 @@ Env setzen
 ```
 $env:Path += ";$env:USERPROFILE\.cargo\bin"
 ```
+
+
+
+
+                   <input type="text" className="inputData input-size--large"
+                               list="knownPluginsDataList"
+                               placeholder="Bsp: FabFilter Pro-Q 4" />
+                        <datalist id="knownPluginsDataList">
+                            {Object.keys(knowledgeKnownApps).map((appName) => (
+                                <option key={appName} value={appName}>
+                                    {appName}
+                                </option>
+                            ))}
+                        </datalist>

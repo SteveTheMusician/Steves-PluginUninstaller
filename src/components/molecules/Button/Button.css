@@ -1,0 +1,19 @@
+button {
+    background-color: var(--color-main);
+    border-radius: var( --border-radius-round);
+    padding: 12px 24px;
+    font-size: 12px;
+    box-shadow: 0px -4px 8px #ffffff,0px 4px 8px #00000033;
+    outline: none;
+    transition: var(--transition-default);
+}
+
+button:active {
+    outline: none;
+    box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset;
+}
+
+button:hover {
+    /* box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset; */
+    color: var(--color-highlight);
+}
