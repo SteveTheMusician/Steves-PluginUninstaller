@@ -1,0 +1,21 @@
+.input-withButton {
+    width: 100%;
+    padding: 0;
+    border: 1px solid #f4f4f4;
+    box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset;
+    background-color: #f4f4f4;
+    border-radius: 100px;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.input-withButton input[type=text] {
+    box-shadow: none;
+    background-color: transparent;
+    border: 0px;
+    outline: 0px;
+}
+
+.input-withButton button {
+    margin-right: 12px;
+}

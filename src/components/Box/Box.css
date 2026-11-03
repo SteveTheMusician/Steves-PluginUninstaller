@@ -9,8 +9,6 @@
 
 .box-manualUninstall-Input {
   grid-area: 1 / 1 / 2 / 3;
-  /* backdrop-filter: blur(20px) brightness(1.05); */
-  /* background-color: #ffffff55; */
 }
 
 .box-manualUninstall-options {

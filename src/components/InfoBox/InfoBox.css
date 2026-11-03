@@ -1,0 +1,17 @@
+.infobox {
+  padding: 12px;
+  border-radius: var(--border-radius-small);
+  background-color: #ccddf9ff;
+  color: #6a7693;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 12px 0px;
+}
+
+.infobox-textContainer {
+  padding-left: 12px;
+}
+.infobox-iconContainer {
+  align-items: flex-start;
+  height: 24px;
+}

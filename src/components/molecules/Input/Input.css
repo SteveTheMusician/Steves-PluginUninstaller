@@ -1,11 +1,6 @@
-.inputData-container {
-  width: 100%;
-  height: calc(100% - 24px);
-}
-
 .input-size--large {
   width: calc(100% - 12px);
-  max-width: 462px;
+  max-width: 588px;
   padding: 22px;
   border: 1px solid #f4f4f4;
   box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset;

@@ -21,6 +21,11 @@ html, body {
   padding: 0;
 }
 
+h1 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
 p {
   margin-block-start: 0em;
   margin-block-end: 0em;
@@ -143,7 +148,23 @@ svg {
 .appWindow-manualUninstall-gridContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 0fr);
   grid-column-gap: 12px;
   grid-row-gap: 12px;
+}
+
+.inputData-container {
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.optionRow {
+  position: absolute;
+}
+
+@media only screen and (min-height: 780px) {
+  .appWindow-manualUninstall-gridContainer {
+    grid-template-rows: repeat(3, 1fr);
+  }
 }
