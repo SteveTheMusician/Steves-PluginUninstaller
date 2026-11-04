@@ -1,0 +1,32 @@
+{
+    "userPath": "/Users/",
+    "basicPaths": {
+        "AU": {
+            "path": "/Library/Audio/Plug-Ins/Components/",
+            "extension": ".component"
+        },
+        "VST": {
+            "path": "/Library/Audio/Plug-Ins/VST/",
+            "extension": ".vst"
+        },
+        "VST3": {
+            "path": "/Library/Audio/Plug-Ins/VST3/",
+            "extension": ".vst3"
+        }
+    },
+    "knownPaths": {
+    },
+    "knownApps": {
+        "TDR Nova": {
+            "icon": "",
+            "useBasicPaths": true,
+            "hasCustomFolder": false,
+            "hasUninstaller": false,
+            "hasStandAlone": false,
+            "appCustomFolders": {
+            },
+            "appUninstallerPath": "",
+            "appStandAlonePaths": {}
+        }
+    }
+}

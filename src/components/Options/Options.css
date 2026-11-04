@@ -1,0 +1,7 @@
+.OptionsSwitch-Container {
+    justify-content: space-between;
+    border-radius: var(--border-radius-small);
+    padding: 12px;
+    outline: 1px solid #ddd;
+    margin: 12px 0px;
+}

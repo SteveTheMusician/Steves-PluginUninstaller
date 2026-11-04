@@ -1,4 +1,9 @@
 {
+    "basicPaths": {
+        "VST": "C:/Program Files (x86)/VstPlugins/",
+        "VST2": "C:/Program Files/Common Files/VST2/",
+        "VST3": "C:/Program Files/Common Files/VST3/"
+    },
     "knownPaths": {
         "Steinberg VST Ordner": "C:/Program Files/Steinberg/VstPlugins"
     },

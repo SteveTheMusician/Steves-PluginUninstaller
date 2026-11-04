@@ -119,6 +119,12 @@ svg {
   height: 54px;
 }
 
+.sublabel {
+  font-size: 10px;
+  color: var(--color-font-subtext);
+  font-weight: bold;
+}
+
 .navTabs-container {
     width: -webkit-fill-available;
     justify-content: flex-start;
@@ -155,12 +161,14 @@ svg {
 
 .inputData-container {
   width: 100%;
-  height: 100%;
   justify-content: space-between;
+  padding: 48px 0px 24px 0px;
 }
 
-.optionRow {
-  position: absolute;
+.option-container {
+  /* outline: 1px solid #ddd; */
+  border-radius: var(--border-radius-small);
+  /* padding: 12px 12px; */
 }
 
 @media only screen and (min-height: 780px) {

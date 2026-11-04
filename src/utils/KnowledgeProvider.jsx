@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import Dialog from '../components/Dialog/Dialog';
+import { userSystem } from "./userSystem";
 const KnowledgeContext = createContext(null);
 
 export function useKnowledge() {
@@ -18,14 +19,14 @@ export default function KnowledgeProvider({ children }) {
     return () => { mounted = false;};
   }, []);
   return (
-    <KnowledgeContext.Provider value={knowledge}>
+    <KnowledgeContext.Provider value={{knowledge,userSystem}}>
       {knowledge !== null ? children: <Dialog dialogType={'error'} dialogText={'Knowledge Daten konntennicht geladen werden'} setShowDialog={true}/>}
     </KnowledgeContext.Provider>
   );
 }
 
 async function parseKnowledge() {
-  const userSystem = "windows";
+
   try {
     const knowledgeData = await import(`../brainData/${userSystem}/knowledge.json`);
     return knowledgeData.default ?? knowledgeData;

@@ -1,13 +1,14 @@
 import './Input.css'
 import classNames from 'classnames';
 
-export default function Input({type,id,classes,placeholder,isDatalist,datalistId,datalistItems}) {
+export default function Input({type,id,classes,placeholder,isDatalist,datalistId,datalistItems,onChange}) {
 
     return (
         <>
             <input id={id} type={type} className={classNames("inputData",classes)}
                                    list={datalistId}
-                                   placeholder={placeholder} />
+                                   placeholder={placeholder} 
+                                   onChange={onChange} />
             {isDatalist ? 
                 <datalist id={datalistId}>
                     {Object.keys(datalistItems).map((itemName) => (
