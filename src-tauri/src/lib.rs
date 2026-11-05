@@ -2,23 +2,55 @@
 use tauri_plugin_fs::FsExt;
 
 #[tauri::command]
-    // add commands to invoke handler so rust can use them
-fn delete_file(path: String) -> Result<(), String> { 
+fn delete_file(path: String) -> Result<String, String> {
+    let mut log = String::new();
+    
     let file_path = std::path::Path::new(&path);
     
+    log.push_str(&format!("Checking: {}\n", path));
+    println!("{}", log);
+
     if !file_path.exists() {
-        return Err(format!("Path does not exist: {}", path));
-    }
-    
-    if file_path.is_file() {
-        return std::fs::remove_file(file_path)
-            .map_err(|e| format!("Delete File ERROR: {}", e));
-    } else if file_path.is_dir() {
-        return std::fs::remove_dir_all(file_path)
-            .map_err(|e| format!("Delete Directory ERROR: {}", e));
+        let err_msg = "Path does not exist".to_string();
+        log.push_str(&format!("ERROR: {}\n", err_msg));
+        println!("{}", log);
+        return Ok(log);  // Log zurückgeben, aber kein Error
     }
 
-    Err("Path is neither file nor directory".to_string())
+    if file_path.is_file() {
+        match std::fs::remove_file(file_path) {
+            Ok(_) => {
+                log.push_str("File deleted successfully\n");
+                println!("{}", log);
+                Ok(log)
+            }
+            Err(e) => {
+                let err_msg = format!("Failed to delete file: {}", e);
+                log.push_str(&err_msg);
+                println!("{}", log);
+                Err(err_msg)
+            }
+        }
+    } else if file_path.is_dir() {
+        match std::fs::remove_dir_all(file_path) {
+            Ok(_) => {
+                log.push_str("Directory deleted successfully\n");
+                println!("{}", log);
+                Ok(log)
+            }
+            Err(e) => {
+                let err_msg = format!("Failed to delete directory: {}", e);
+                log.push_str(&err_msg);
+                println!("{}", log);
+                Err(err_msg)
+            }
+        }
+    } else {
+        let msg = "Path is neither file nor directory".to_string();
+        log.push_str(&msg);
+        println!("{}", log);
+        Ok(msg)
+    }
 }
 #[tauri::command]
 fn check_path_status(path: String) -> serde_json::Value {

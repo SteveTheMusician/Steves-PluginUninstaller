@@ -20,7 +20,7 @@ export default function KnowledgeProvider({ children }) {
   }, []);
   return (
     <KnowledgeContext.Provider value={{knowledge,userSystem}}>
-      {knowledge !== null ? children: <Dialog dialogType={'error'} dialogText={'Knowledge Daten konntennicht geladen werden'} setShowDialog={true}/>}
+      {knowledge !== null ? children: <Dialog dialogType={'error'} dialogText={'Unable to load knowledge json files.'} showDialogTrigger={true}/>}
     </KnowledgeContext.Provider>
   );
 }

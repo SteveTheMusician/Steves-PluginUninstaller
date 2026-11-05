@@ -5,10 +5,13 @@ import { useKnowledge } from "../../../utils/KnowledgeProvider";
 import Window from '../../Window/Window'
 import Box from '../../Box/Box';
 import { InputWithButton, OptionsSwitch } from "../../components.import";
-import { invoke } from '@tauri-apps/api/core';
+import { useDialog } from "../../../utils/DialogProvider";
+import Uninstaller from "../../../core/Uninstaller";
 
-export default function ManualUninstallWindow({selectedNavItem,setSelectedNavItem,showAppWindow}) {
+export default function ManualUninstallWindow({selectedNavItem,setSelectedNavItem,showAppWindow,setShowUninstallProgressWindow}) {
     
+    const { openDialog } = useDialog();
+
     const pluginsKnowledge = useKnowledge();
     const knowledgeKnownApps = pluginsKnowledge.knowledge.knownApps;
     const knowledgeBasicPaths = pluginsKnowledge.knowledge.basicPaths
@@ -18,51 +21,36 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
     const windowLink = "tab_manualuninstall";
     const isVisible = showAppWindow === windowLink;
     const [vstNameToDelete, setVstNameToDelete] = useState('')
+    // const [showUninstallWarnDialog, setShowUninstallWarnDialog] = useState(false)
+    // const [startManualDelete, setStartManualDelete] = useState(false)
 
     const defaultUninstallPathNames =  []
     Object.keys(knowledgeBasicPaths).map((path) => defaultUninstallPathNames.push(path))
 
+
     
-    //useEffect(() => {
-        //   if (showAppWindow === windowLink) {
-            //       setBoxesVisible(true);
-            //       window.boxElemTimer = 0
-            //    } else {
-                //        setBoxesVisible(false);
-                //    }
-                //}, [showAppWindow]);
-                
-                
-                // if(selectedNavItem === 'Manual Uninstall') {
-        // showAppWindow = true
-        // setboxesVisible(true)
-    // } else {
-        // setboxesVisible(false)
-    // }
-
-    async function handleDelete() {
-        
-        for(let defaultUninstallPath of defaultUninstallPathNames) {
-            let fileToDeleteCommon = knowledgeBasicPaths[defaultUninstallPath].path +  vstNameToDelete + knowledgeBasicPaths[defaultUninstallPath].extension
-            let fileToDeleteUser = knowledgeUserPath+'/'+userNameTest+fileToDeleteCommon
-            try{
-                // delete files in common/ root folders
-                let deletePluginInCommon = await invoke('delete_file', { path: fileToDeleteCommon});
-                console.log('Delete in common: ',fileToDeleteCommon, deletePluginInCommon)
-
-            }catch(e) {
+   const showDeleteWarning = () => {
+        openDialog({
+            dialogType: 'warnconfirm',
+            dialogText: 'Delete this plugin?',
+            dialogOkFunction: async () => {
+              console.log('starting uninstall...');
+              try{
+                  let x = await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete);
+                  console.log('Uninstaller response',x)
+              }catch(e){
                 console.log(e)
-            }
-            try{
-                let deletePluginInUser = await invoke('delete_file', { path: fileToDeleteUser});
-                console.log('Delete in user: ',fileToDeleteUser, deletePluginInUser)
+              }
+            },
+            dialogAboardFunction: () => {
+              console.log('aborted');
+            },
+            dialogButtonTextWarnConfirm: 'Uninstall',
+            dialogButtonTextWarnConfirmAboard: 'Cancel'
+        });
+    };
 
-            }catch(e) {
-                console.log(e)
-            }
-            console.log(defaultUninstallPath, knowledgeBasicPaths[defaultUninstallPath])
-        }
-    }
+
 
     const changeVstName = event => {
         console.log('Change Value, ',event.target.value)
@@ -71,6 +59,8 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
 
     return (
         <Window isVisible={isVisible}>
+
+            
             <ContentFrame classes={'appWindow-manualUninstall-gridContainer'}>
                 <Box classes={'box-manualUninstall-Input'} hiddenClass={'box-big--hidden'} trigger={isVisible} delay={1}>
                     <h1>Manual Uninstall</h1>
@@ -80,7 +70,7 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
                         <InputWithButton id={'manualSearch'} classes={'input-size--large'} 
                             placeholder={'E.g: FabFilter Pro-Q 4'} 
                             isDatalist={true} datalistId={'knownPluginsDataList'} datalistItems={knowledgeKnownApps}
-                            buttonId={'button_deleteManually'} buttonName={'Delete'} functionName={handleDelete}
+                            buttonId={'button_deleteManually'} buttonName={'Delete'} functionName={showDeleteWarning}
                             onChange={changeVstName}
                         />
                     </div>

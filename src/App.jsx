@@ -7,25 +7,31 @@ import {
   InstalledPluginsWindow, 
   ManualUninstallWindow,
   BrainWindow,
-  ConfigWindow
+  ConfigWindow,
+  UninstallProgressWindow
 } from "./components/content/content.import";
+import DialogProvider from "./utils/DialogProvider";
 
 function App() {
 
   const [selectedNavItem, setSelectedNavItem] = useState("Installed Plugins")
   const [showAppWindow, setShowAppWindow] = useState()
+  const [showUninstallProgressWindow, setShowUninstallProgressWindow] = useState(false)
 
   return (
     <KnowledgeProvider>
-      <div id="app">
-        <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowAppWindow={setShowAppWindow}/>
-        <main>
-          <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
-          <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
-          <BrainWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
-          <ConfigWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} />
-        </main>
-      </div>
+      <DialogProvider>
+        <div id="app">
+          {showUninstallProgressWindow ? <UninstallProgressWindow /> : null }
+          <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowAppWindow={setShowAppWindow}/>
+          <main>
+            <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
+            <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
+            <BrainWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
+            <ConfigWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
+          </main>
+        </div>
+      </DialogProvider>
     </KnowledgeProvider>
   );
 }

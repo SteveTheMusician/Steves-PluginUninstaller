@@ -48,3 +48,7 @@ $env:Path += ";$env:USERPROFILE\.cargo\bin"
                                 </option>
                             ))}
                         </datalist>
+
+                                    <Dialog dialogType={'warnconfirm'} dialogText={'beim clicken auf oke bla bla alle daten mit dem namen werden gelöscht - beachtet der einstellungen'} 
+                dialogButtonTextWarnConfirm={'OK'} dialogButtonTextWarnConfirmAboard={'Aboard'} showDialogTrigger={showUninstallWarnDialog} setShowDialogTrigger={setShowUninstallWarnDialog}
+                dialogAboardFunction={setShowUninstallWarnDialog} dialogOkFunction={handleDelete}/>
