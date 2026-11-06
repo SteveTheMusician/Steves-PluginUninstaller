@@ -1,8 +1,9 @@
 
 import { useState } from "react";
 import Tab from "../molecules/Tab/Tab";
+import { setAppStorageConf } from "../../core/appStorage";
 
-export default function Nav({selectedNavItem,setSelectedNavItem,setShowAppWindow}) {
+export default function Nav({selectedNavItem,setSelectedNavItem}) {
 
     const tabButtonArray = [{key: "tab_installedplugins", label:"Installed Plugins",icon:"",onlyIcon:false, noBackground:false}, 
         {key: "tab_manualuninstall", label:"Manual Uninstall",icon:"",onlyIcon:false,noBackground:false}, 
@@ -19,14 +20,14 @@ export default function Nav({selectedNavItem,setSelectedNavItem,setShowAppWindow
         {/* </div> */}
         <div className="navTabs-container dFlex">
            {tabButtonArray.map((item) => (
-                <Tab key={item.key} isActive={selectedNavItem === item.key}  icon={item.icon} onlyIcon={item.onlyIcon} noBackground={item.noBackground} onClick={() => {setSelectedNavItem(item.key); setShowAppWindow(item.key)}}>
+                <Tab key={item.key} isActive={selectedNavItem === item.key}  icon={item.icon} onlyIcon={item.onlyIcon} noBackground={item.noBackground} onClick={() => {setSelectedNavItem(item.key);setAppStorageConf('selectedTab',item.key)}}>
                     {item.label}
                 </Tab>
             ))}
         </div>
         <div className="navConfig-container flex">
             {tabButtonArrayConfigs.map((item) => (
-                <Tab key={item.key} isActive={selectedNavItem === item.key}  icon={item.icon} onlyIcon={item.onlyIcon} noBackground={item.noBackground} onClick={() => {setSelectedNavItem(item.key); setShowAppWindow(item.key)}}>
+                <Tab key={item.key} isActive={selectedNavItem === item.key}  icon={item.icon} onlyIcon={item.onlyIcon} noBackground={item.noBackground} onClick={() => {setSelectedNavItem(item.key);setAppStorageConf('selectedTab',item.key)}}>
                     {item.label}
                 </Tab>
             ))}

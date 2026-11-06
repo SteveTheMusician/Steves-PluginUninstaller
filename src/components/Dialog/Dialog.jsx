@@ -55,7 +55,7 @@ export default function Dialog({dialogType, dialogText, showDialogTrigger, setSh
   return(
     <>
     {showDialogOverlay ? 
-        <div className={classNames('dialog-background-layer flex', hideDialogOverlayDelay ? 'dialog-background-layer--hide' : null) }>
+        <div className={classNames('dialog-background-layer flex', hideDialogOverlayDelay ? 'dialog-background-layer--hide' : null) } onClick={() => {hideDialog()}}>
          <div className={classNames('dialogbox dialog-'+dialogType, showDialogWithDelay? 'dialogbox-show': null, hideDialoagWarnConfirm ? 'dialogbox-aboard--close' : null) }>
             <div className="dialogbox-color-strip"></div>
             <div className="dialogbox-content-container dFlex">

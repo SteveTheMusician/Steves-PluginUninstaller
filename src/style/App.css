@@ -123,6 +123,7 @@ svg {
   font-size: 10px;
   color: var(--color-font-subtext);
   font-weight: bold;
+  line-height: 12px;
 }
 
 .navTabs-container {
@@ -170,6 +171,15 @@ svg {
   /* outline: 1px solid #ddd; */
   border-radius: var(--border-radius-small);
   /* padding: 12px 12px; */
+}
+
+.options-headlineContainer {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.options-headlineContainer .switch {
+  margin-left: 12px;
 }
 
 .UninstallProgressWindow {

@@ -11,24 +11,30 @@ import {
   UninstallProgressWindow
 } from "./components/content/content.import";
 import DialogProvider from "./utils/DialogProvider";
+import AppStorage from "./core/appStorage";
 
 function App() {
-
-  const [selectedNavItem, setSelectedNavItem] = useState("Installed Plugins")
-  const [showAppWindow, setShowAppWindow] = useState()
+  
+  const [selectedNavItem, setSelectedNavItem] = useState('')
   const [showUninstallProgressWindow, setShowUninstallProgressWindow] = useState(false)
 
+  useEffect(() => {
+    let appStorageObj = AppStorage()
+    setSelectedNavItem(appStorageObj.appConf.selectedTab)
+  },[])
+  
+  console.log('-->', selectedNavItem)
   return (
     <KnowledgeProvider>
       <DialogProvider>
         <div id="app">
           {showUninstallProgressWindow ? <UninstallProgressWindow /> : null }
-          <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowAppWindow={setShowAppWindow}/>
+          <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} />
           <main>
-            <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
-            <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
-            <BrainWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
-            <ConfigWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} showAppWindow={showAppWindow} setShowAppWindow={setShowAppWindow} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
+            <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
+            <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
+            <BrainWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
+            <ConfigWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowUninstallProgressWindow={setShowUninstallProgressWindow}/>
           </main>
         </div>
       </DialogProvider>

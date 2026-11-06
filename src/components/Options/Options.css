@@ -1,7 +1,30 @@
-.OptionsSwitch-Container {
+
+.optionTitle {
+    padding-bottom: 2px;
+}
+.Options-Container {
     justify-content: space-between;
     border-radius: var(--border-radius-small);
     padding: 12px;
     outline: 1px solid #ddd;
     margin: 12px 0px;
+    align-items: flex-start;
+}
+
+.Options-ContentLeft {
+    width: calc(50% - 12px);
+    padding-right: 12px;
+}
+
+.Options-ContentRight {
+    width: calc(50% - 12px);
+    padding-left: 12px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    justify-content: flex-end;
+}
+
+.Options-Container-Checks .Options-ContentRight {
+    justify-content: flex-start;
+    padding-top: 0px;
 }

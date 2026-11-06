@@ -19,6 +19,8 @@
   transition: var(--transition-default);
   opacity: 0;
   transform: scale(0.8);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .dialogbox-color-strip {
@@ -159,6 +161,8 @@
   word-wrap: break-word;
   max-height: 140px;
   padding-top: 12px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .dialogbox-button-container{

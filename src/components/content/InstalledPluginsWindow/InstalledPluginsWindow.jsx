@@ -4,10 +4,10 @@ import useState from 'react'
 import Window from '../../Window/Window'
 
 
-export default function InstalledPluginsWindow({selectedNavItem,setSelectedNavItem,showAppWindow,}) {
+export default function InstalledPluginsWindow({selectedNavItem,setSelectedNavItem}) {
 
     const windowLink = "tab_installedplugins"
-    const isVisible = showAppWindow === windowLink;
+    const isVisible = selectedNavItem === windowLink;
 
     return(
         <Window isVisible={isVisible}>
