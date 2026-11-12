@@ -11,10 +11,10 @@ import Uninstaller from "../../../core/Uninstaller";
 import { setAppStorageConf } from "../../../core/appStorage";
 import AppStorage from "../../../core/appStorage";
 
-export default function ManualUninstallWindow({selectedNavItem,setSelectedNavItem,setShowUninstallProgressWindow}) {
+export default function ManualUninstallWindow({selectedNavItem,setSelectedNavItem,setShowUninstallProgressWindow,appStorageObj}) {
     
     const { openDialog } = useDialog();
-    const appStorageObj = AppStorage()
+    // const appStorageObj = appStorageObj
     const pluginsKnowledge = useKnowledge();
     const knowledgeKnownApps = pluginsKnowledge.knowledge.knownApps;
     const knowledgeVstPlugins = pluginsKnowledge.knowledge.plugIns
@@ -30,18 +30,17 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
     Object.keys(knowledgeVstPlugins).map((vst) => {
         defaultUninstallPathNames.push(vst)
     })
-    let lStorage_uninstallVSTName = appStorageObj.appConf.remove_pluginType
-    
+    const storage_uninstallVSTName = appStorageObj.appConf.remove_pluginType
+
    const showDeleteWarning = () => {
         openDialog({
             dialogType: 'warnconfirm',
             dialogText: 'Delete this plugin?',
             dialogOkFunction: async () => {
               console.log('🏁 starting uninstall...');
-              console.log('📀 uninstall data:', pluginsKnowledge, vstNameToDelete, lStorage_uninstallVSTName)
+              console.log('📀 uninstall data:', pluginsKnowledge, vstNameToDelete, storage_uninstallVSTName)
               try{
-                  let x = await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete, lStorage_uninstallVSTName);
-                  console.log('Uninstaller response',x)
+                await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete, storage_uninstallVSTName);
               }catch(e){
                 console.log(e)
               }
@@ -63,12 +62,12 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
     const changeVstFileCheck = event => {
         let checkBoxvalue = event.target.value
         if(event.target.checked) {
-            lStorage_uninstallVSTName.push(checkBoxvalue)
-            setAppStorageConf('remove_pluginType',lStorage_uninstallVSTName)
+            storage_uninstallVSTName.push(checkBoxvalue)
+            setAppStorageConf('remove_pluginType',storage_uninstallVSTName)
         } else {
-            const uninstallExtArrayIndex = lStorage_uninstallVSTName.indexOf(checkBoxvalue)
-            lStorage_uninstallVSTName.splice(uninstallExtArrayIndex, 1)
-            setAppStorageConf('remove_pluginType',lStorage_uninstallVSTName)
+            const uninstallExtArrayIndex = storage_uninstallVSTName.indexOf(checkBoxvalue)
+            storage_uninstallVSTName.splice(uninstallExtArrayIndex, 1)
+            setAppStorageConf('remove_pluginType',storage_uninstallVSTName)
         }
         
     }
@@ -108,7 +107,7 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
                             {
                                 defaultUninstallPathNames.map((VSTName) => {
                                     // let vstExt = knowledgeVstPlugins[VSTName].extension
-                                    return <Input key={VSTName} type={'checkbox'} checked={''} checkedState={lStorage_uninstallVSTName} label={VSTName} value={VSTName} name={'check_removePluginType'} onChange={changeVstFileCheck}/>
+                                    return <Input key={VSTName} type={'checkbox'} checked={''} checkedState={storage_uninstallVSTName} label={VSTName} value={VSTName} name={'check_removePluginType'} onChange={changeVstFileCheck}/>
                                 })
                            
                             }

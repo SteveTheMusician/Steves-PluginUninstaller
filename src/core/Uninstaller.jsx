@@ -2,7 +2,7 @@ import { invoke } from '@tauri-apps/api/core';
 import AppStorage from './appStorage';
 
 const userNameTest = "admin"
-export default async function Uninstaller(type,setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete, vstExtensionToDelete) {
+export default async function Uninstaller(type,setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete) {
     const appStorageObj = AppStorage()
     const knowledgePublicPaths = pluginsKnowledge.knowledge.defaultPaths.public
     const knowledgeUserPath = pluginsKnowledge.knowledge.defaultPaths.user

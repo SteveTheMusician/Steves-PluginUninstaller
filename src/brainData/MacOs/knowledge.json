@@ -3,7 +3,8 @@
     "plugIns": {
         "AU": {
             "folder": "Components/",
-            "extension": ".component"
+            "extension": ".component",
+            "defaultChecked": "true"
         },
         "VST": {
             "folder": "VST/",
@@ -11,7 +12,8 @@
         },
         "VST3": {
             "folder": "VST3/",
-            "extension": ".vst3"
+            "extension": ".vst3",
+            "defaultChecked": "true"
         }
     },
     "defaultPaths": {

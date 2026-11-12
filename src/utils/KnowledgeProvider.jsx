@@ -7,6 +7,10 @@ export function useKnowledge() {
   return useContext(KnowledgeContext);
 }
 
+export async function useKnowledgeNoProvider() {
+  return await parseKnowledge()
+}
+
 export default function KnowledgeProvider({ children }) {
   const [knowledge, setKnowledge] = useState(null);
   useEffect(() => {
@@ -25,7 +29,7 @@ export default function KnowledgeProvider({ children }) {
   );
 }
 
-async function parseKnowledge() {
+export async function parseKnowledge() {
 
   try {
     const knowledgeData = await import(`../brainData/${userSystem}/knowledge.json`);
