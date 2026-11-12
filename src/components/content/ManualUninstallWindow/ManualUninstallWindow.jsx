@@ -8,15 +8,17 @@ import { InputWithButton, OptionsSwitch, OptionsEmpty } from "../../components.i
 import { Switch, Select, Input } from "../../molecules/molecules.import";
 import { useDialog } from "../../../utils/DialogProvider";
 import Uninstaller from "../../../core/Uninstaller";
+import { setAppStorageConf } from "../../../core/appStorage";
+import AppStorage from "../../../core/appStorage";
 
 export default function ManualUninstallWindow({selectedNavItem,setSelectedNavItem,setShowUninstallProgressWindow}) {
     
     const { openDialog } = useDialog();
-
+    const appStorageObj = AppStorage()
     const pluginsKnowledge = useKnowledge();
     const knowledgeKnownApps = pluginsKnowledge.knowledge.knownApps;
-    const knowledgeBasicPaths = pluginsKnowledge.knowledge.basicPaths
-    const knowledgeUserPath = pluginsKnowledge.knowledge.userPath
+    const knowledgeVstPlugins = pluginsKnowledge.knowledge.plugIns
+    const knowledgeDefaultPaths = pluginsKnowledge.knowledge.defaultPaths
     const userNameTest = "admin"
     const userSystem = pluginsKnowledge.userSystem
     const windowLink = "tab_manualuninstall";
@@ -25,18 +27,20 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
     // const [showUninstallWarnDialog, setShowUninstallWarnDialog] = useState(false)
     // const [startManualDelete, setStartManualDelete] = useState(false)
     const defaultUninstallPathNames =  []
-    Object.keys(knowledgeBasicPaths).map((path) => defaultUninstallPathNames.push(path))
-
-
+    Object.keys(knowledgeVstPlugins).map((vst) => {
+        defaultUninstallPathNames.push(vst)
+    })
+    let lStorage_uninstallVSTName = appStorageObj.appConf.remove_pluginType
     
    const showDeleteWarning = () => {
         openDialog({
             dialogType: 'warnconfirm',
             dialogText: 'Delete this plugin?',
             dialogOkFunction: async () => {
-              console.log('starting uninstall...');
+              console.log('🏁 starting uninstall...');
+              console.log('📀 uninstall data:', pluginsKnowledge, vstNameToDelete, lStorage_uninstallVSTName)
               try{
-                  let x = await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete);
+                  let x = await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete, lStorage_uninstallVSTName);
                   console.log('Uninstaller response',x)
               }catch(e){
                 console.log(e)
@@ -53,8 +57,20 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
 
 
     const changeVstName = event => {
-        console.log('Change Value, ',event.target.value)
         setVstNameToDelete(event.target.value)
+    }
+
+    const changeVstFileCheck = event => {
+        let checkBoxvalue = event.target.value
+        if(event.target.checked) {
+            lStorage_uninstallVSTName.push(checkBoxvalue)
+            setAppStorageConf('remove_pluginType',lStorage_uninstallVSTName)
+        } else {
+            const uninstallExtArrayIndex = lStorage_uninstallVSTName.indexOf(checkBoxvalue)
+            lStorage_uninstallVSTName.splice(uninstallExtArrayIndex, 1)
+            setAppStorageConf('remove_pluginType',lStorage_uninstallVSTName)
+        }
+        
     }
 
     return (
@@ -81,7 +97,6 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
                             <h3>General</h3>
                         </div>
                         <OptionsSwitch label={'Use app knowledge'} sublabel={'Related to '+ userSystem} type={'checkbox'} id={'checkbox_useUninstallAppKnowledge'} name={'check_useUninstallAppKnowledge'}/>
-                        
                     </div>
                 </Box>
                 <Box classes={'box-manualUninstall-actions'} hiddenClass={'box-left--hidden'} trigger={isVisible} delay={3}>
@@ -90,12 +105,16 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
                             <h3>Remove</h3>
                         </div>
                         <OptionsEmpty label={'PlugIn File-Types'} sublabel={'Select which file types you want to remove, based on your OS'} classes={'Options-Container-Checks'}>
-                            <Input type={'checkbox'} label={'VST'}/>
-                            <Input type={'checkbox'} label={'VST3'}/>
-                            <Input type={'checkbox'} label={'AU'}/>
+                            {
+                                defaultUninstallPathNames.map((VSTName) => {
+                                    // let vstExt = knowledgeVstPlugins[VSTName].extension
+                                    return <Input key={VSTName} type={'checkbox'} checked={''} checkedState={lStorage_uninstallVSTName} label={VSTName} value={VSTName} name={'check_removePluginType'} onChange={changeVstFileCheck}/>
+                                })
+                           
+                            }
                         </OptionsEmpty>
-                        <OptionsSwitch label={'Root Paths'} sublabel={'/Library/Audio/'} type={'checkbox'} id={'check_useUninstallPathDefault'} name={'check_useUninstallPaths'}/>
-                        <OptionsSwitch label={'User Paths'} sublabel={'/Users/admin/Library/Audio'} type={'checkbox'} id={'check_useUninstallPathUser'} name={'check_useUninstallPaths'}/>
+                        <OptionsSwitch label={'In Public Folder'} sublabel={knowledgeDefaultPaths.public} type={'checkbox'} id={'check_useUninstallPathDefault'} name={'check_useUninstallPaths'}/>
+                        <OptionsSwitch label={'In User Folder'} sublabel={'/Users/admin/Library/Audio'} type={'checkbox'} id={'check_useUninstallPathUser'} name={'check_useUninstallPaths'}/>
                         <OptionsSwitch label={'Custom Paths'} sublabel={'Meine Pfade (anpassen)'} type={'checkbox'} id={'check_useUninstallUserPath'} name={'check_useUninstallCustomPaths'}/>
                         <OptionsSwitch label={'Clear DAW registry'} sublabel={'FLStudio, Cubebase'} type={'checkbox'} id={'checkbox_clearRegFromDAW'} name={'check_clearRegFromDAW'}/>
                     </div>

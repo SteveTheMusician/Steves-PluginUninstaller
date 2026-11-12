@@ -4,20 +4,22 @@
     padding: 12px 24px;
     border-radius: var(--border-radius-round);
     height: 40px;
-    box-shadow: 0px -4px 8px #ffffff,0px 4px 8px #00000033,0px 4px 8px #00000033 inset;
+    /* box-shadow: 0px -4px 8px #ffffff,0px 4px 8px #00000033,0px 4px 8px #00000033 inset; */
     outline: 1px solid #eee;
 }
 
 .tabButton:hover {
-  background-color: var(--color-highlight);
+  /* background-color: var(--color-highlight); */
   color: var(--color-icon-default);
-  outline: 1px solid #abe5e9;
+  /* outline: 1px solid #abe5e9; */
 }
 
 .tabButton.active, .tabButton:active {
-    background-color: var(--color-active);
-    box-shadow: 0px 0px 16px var(--color-active),0px 4px 8px #00000033 inset;
-    outline: 1px solid #abe5e9;
+    /* background-color: var(--color-active); */
+    /* box-shadow: 0px 0px 16px var(--color-active),0px 4px 8px #00000033 inset; */
+    box-shadow: 0px 4px 8px #00000033 inset;
+    /* outline: 1px solid #abe5e9; */
+     outline: 1px solid #eee;
 }
 
 .tabButton svg {

@@ -1,18 +1,22 @@
 {
     "userPath": "/Users/",
-    "basicPaths": {
+    "plugIns": {
         "AU": {
-            "path": "/Library/Audio/Plug-Ins/Components/",
+            "folder": "Components/",
             "extension": ".component"
         },
         "VST": {
-            "path": "/Library/Audio/Plug-Ins/VST/",
+            "folder": "VST/",
             "extension": ".vst"
         },
         "VST3": {
-            "path": "/Library/Audio/Plug-Ins/VST3/",
+            "folder": "VST3/",
             "extension": ".vst3"
         }
+    },
+    "defaultPaths": {
+        "public": "/Library/Audio/Plug-Ins/",
+        "user": "/Users/{user}/Library/Audio/Plug-Ins/"
     },
     "knownPaths": {
     },

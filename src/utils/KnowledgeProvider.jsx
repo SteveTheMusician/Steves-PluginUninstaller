@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import Dialog from '../components/Dialog/Dialog';
-import { userSystem } from "./userSystem";
+import { userSystem } from "../core/userSystem";
 const KnowledgeContext = createContext(null);
 
 export function useKnowledge() {

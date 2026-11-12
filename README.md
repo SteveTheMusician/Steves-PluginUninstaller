@@ -34,3 +34,8 @@ Env setzen
 ```
 $env:Path += ";$env:USERPROFILE\.cargo\bin"
 ```
+
+## App Icon Setzen
+- Neues App Icon in src-tauri/icons Folder setzen
+- Command ausführen: npm run tauri icon ./src-tauri/icons/[LogoName.png]
+- Target-Ordner löschen

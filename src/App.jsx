@@ -23,7 +23,6 @@ function App() {
     setSelectedNavItem(appStorageObj.appConf.selectedTab)
   },[])
   
-  console.log('-->', selectedNavItem)
   return (
     <KnowledgeProvider>
       <DialogProvider>
