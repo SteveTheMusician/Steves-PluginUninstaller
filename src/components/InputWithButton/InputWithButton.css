@@ -19,3 +19,7 @@
 .input-withButton button {
     margin-right: 12px;
 }
+
+.input-withButton label {
+    width: 100%;
+}

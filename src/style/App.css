@@ -21,6 +21,10 @@ html, body {
   padding: 0;
 }
 
+div ::-webkit-scrollbar {
+  display: none;
+}
+
 h1 {
   margin-block-start: 0;
   margin-block-end: 0;
@@ -87,6 +91,11 @@ main {
 svg {
   transition: var(--transition-default);
 }
+
+.scrollbar--visible::-webkit-scrollbar {
+  display: block;
+}
+
 
 .flex {
     display: flex;
