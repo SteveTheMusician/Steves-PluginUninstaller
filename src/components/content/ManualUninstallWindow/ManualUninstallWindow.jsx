@@ -52,8 +52,6 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
         });
     };
 
-
-
     const changeVstName = event => {
         setVstNameToDelete(event.target.value)
     }
@@ -73,13 +71,9 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
 
     return (
         <Window isVisible={isVisible}>
-
-            
             <ContentFrame classes={'appWindow-manualUninstall-gridContainer'}>
                 <Box classes={'box-manualUninstall-Input'} hiddenClass={'box-big--hidden'} trigger={isVisible} delay={1}>
                     <h1>Manual Uninstall</h1>
-                    {/* <p>Enter the exact name of your VST/AU Plugin.</p> */}
-                        {/* <InfoBox text={'To delete your PlugIns correctly, you have to enter the exact name or select one from the list.'}/> */}
                     <div className="flex inputData-container">
                         <InputWithButton id={'manualSearch'} classes={'inputData input-size--large'} 
                             placeholder={'E.g: FabFilter Pro-Q 4'} 

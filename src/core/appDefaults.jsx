@@ -1,6 +1,11 @@
 export const default_selectedTab = "tab_installedplugins"
 export const appDefaultStorageObj = {
-    "inf":{"configVersion":"0.2"},
+    "inf":{
+        "configVersion":"0.2",
+        "version": "",
+        "buildversion": "",
+        "versionname": ""
+    },
     "user":{
         "username":"",
         "useralias":"", 

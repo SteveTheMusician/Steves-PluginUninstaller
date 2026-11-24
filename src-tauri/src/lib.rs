@@ -14,7 +14,7 @@ fn delete_file(path: String) -> Result<String, String> {
         let err_msg = "Path does not exist".to_string();
         log.push_str(&format!("ERROR: {}\n", err_msg));
         println!("{}", log);
-        return Ok(log);  // Log zurückgeben, aber kein Error
+        return Ok(log);
     }
 
     if file_path.is_file() {

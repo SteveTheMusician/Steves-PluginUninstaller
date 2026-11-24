@@ -1,4 +1,17 @@
 button {
+  border: 0;
+  outline: none;
+  transition: var(--transition-default);
+  cursor: pointer;
+  box-shadow: 0px 0px 12px #00000033;
+  user-select: none;
+}
+
+button:active {
+  outline: 1px solid var(--color-highlight);
+}
+
+button {
     background-color: var(--color-main);
     border-radius: var( --border-radius-round);
     padding: 12px 24px;
@@ -8,6 +21,7 @@ button {
     transition: var(--transition-default);
 }
 
+
 button:active {
     outline: none;
     box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset;
@@ -16,4 +30,14 @@ button:active {
 button:hover {
     /* box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset; */
     color: var(--color-highlight);
+}
+
+.button-reset {
+    background-color: var(--color-none);
+    /* color: var(--color-close); */
+}
+
+.button-reset:hover {
+    background-color: var(--color-none);
+    color: var(--color-close);
 }

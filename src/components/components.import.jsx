@@ -3,11 +3,13 @@ import InputWithButton from "./InputWithButton/InputWithButton"
 import OptionsSwitch from "./Options/OptionsSwitch"
 import OptionsEmpty from "./Options/OptionsEmpty"
 import ButtonFolder from "./ButtonFolder/ButtonFolder"
+import OptionsButton from "./Options/OptionsButton"
 
 export {
     InputWithButton,
     InfoBox,
     OptionsEmpty,
     OptionsSwitch,
-    ButtonFolder
+    ButtonFolder,
+    OptionsButton
 }

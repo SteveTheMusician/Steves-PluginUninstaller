@@ -1,5 +1,6 @@
 import { default_selectedTab, appDefaultStorageObj } from "./appDefaults"
 import { useKnowledgeNoProvider } from "../utils/KnowledgeProvider"
+import versiondata from '../../version.json' with { type: "json" }
 
 export function setAppStorage(conf,key,value) {
     let appStorage = localStorage.getItem('AppStorage')
@@ -25,6 +26,9 @@ export default async function AppStorage() {
                 }
             })
             // rewrite app storage when version differs from default object or is empty
+            appDefaultStorageObj.inf.version = versiondata.version
+            appDefaultStorageObj.inf.buildversion = versiondata.build
+            appDefaultStorageObj.inf.versionname = versiondata.versionname
             appDefaultStorageObj.appConf.remove_pluginType = defaultStorageRemovePluginTypeArr
             appDefaultStorageObj.appConf.selectedTab = default_selectedTab
             localStorage.setItem('AppStorage',JSON.stringify(appDefaultStorageObj))

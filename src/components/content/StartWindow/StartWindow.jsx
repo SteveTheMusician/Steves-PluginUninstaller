@@ -73,8 +73,6 @@ export default function StartWindow({setShowStartScreen}) {
     
     return (
         <Window isVisible={isVisible}>
-
-            
             <ContentFrame classes={'appWindow-Start'}>
                 <Box classes={''} hiddenClass={'box-big--hidden'} trigger={isVisible} delay={1}>
                     <h1>Welcome</h1>
