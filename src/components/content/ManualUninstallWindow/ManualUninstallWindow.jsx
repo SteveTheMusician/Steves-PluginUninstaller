@@ -8,7 +8,7 @@ import { InputWithButton, OptionsSwitch, OptionsEmpty } from "../../components.i
 import { Switch, Select, Input } from "../../molecules/molecules.import";
 import { useDialog } from "../../../utils/DialogProvider";
 import Uninstaller from "../../../core/Uninstaller";
-import { setAppStorageConf } from "../../../core/appStorage";
+import { setAppStorage } from "../../../core/appStorage";
 import AppStorage from "../../../core/appStorage";
 
 export default function ManualUninstallWindow({selectedNavItem,setSelectedNavItem,setShowUninstallProgressWindow,appStorageObj}) {
@@ -19,7 +19,6 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
     const knowledgeKnownApps = pluginsKnowledge.knowledge.knownApps;
     const knowledgeVstPlugins = pluginsKnowledge.knowledge.plugIns
     const knowledgeDefaultPaths = pluginsKnowledge.knowledge.defaultPaths
-    const userNameTest = "admin"
     const userSystem = pluginsKnowledge.userSystem
     const windowLink = "tab_manualuninstall";
     const isVisible = selectedNavItem === windowLink;
@@ -40,7 +39,7 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
               console.log('🏁 starting uninstall...');
               console.log('📀 uninstall data:', pluginsKnowledge, vstNameToDelete, storage_uninstallVSTName)
               try{
-                await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete, storage_uninstallVSTName);
+                await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete, appStorageObj);
               }catch(e){
                 console.log(e)
               }
@@ -63,11 +62,11 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
         let checkBoxvalue = event.target.value
         if(event.target.checked) {
             storage_uninstallVSTName.push(checkBoxvalue)
-            setAppStorageConf('remove_pluginType',storage_uninstallVSTName)
+            setAppStorage('appConf','remove_pluginType',storage_uninstallVSTName)
         } else {
             const uninstallExtArrayIndex = storage_uninstallVSTName.indexOf(checkBoxvalue)
             storage_uninstallVSTName.splice(uninstallExtArrayIndex, 1)
-            setAppStorageConf('remove_pluginType',storage_uninstallVSTName)
+            setAppStorage('appConf','remove_pluginType',storage_uninstallVSTName)
         }
         
     }

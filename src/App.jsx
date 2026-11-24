@@ -8,7 +8,8 @@ import {
   ManualUninstallWindow,
   BrainWindow,
   ConfigWindow,
-  UninstallProgressWindow
+  UninstallProgressWindow,
+  StartWindow
 } from "./components/content/content.import";
 import DialogProvider from "./utils/DialogProvider";
 import AppStorage from "./core/appStorage";
@@ -18,13 +19,16 @@ function App() {
   const [selectedNavItem, setSelectedNavItem] = useState('')
   const [showUninstallProgressWindow, setShowUninstallProgressWindow] = useState(false)
   const [appStorageObj, setAppStorageObj] = useState()
+  const [showStartScreen, setShowStartScreen] = useState(false)
 
   useEffect( () => {
     async function loadStorage() {
-      let appStorage = await AppStorage()
-      console.log('appstorage app', appStorage)
+      const appStorage = await AppStorage()
       setAppStorageObj(appStorage)
       setSelectedNavItem(appStorage.appConf.selectedTab)
+      if(!appStorage.user.username) {
+        setShowStartScreen(true)
+      }
     }
     if(!appStorageObj) {
       loadStorage()
@@ -36,13 +40,26 @@ function App() {
       <DialogProvider>
         <div id="app">
           {showUninstallProgressWindow ? <UninstallProgressWindow /> : null }
-          <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} />
-          <main>
-            <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowUninstallProgressWindow={setShowUninstallProgressWindow} appStorageObj={appStorageObj}/>
-            <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowUninstallProgressWindow={setShowUninstallProgressWindow} appStorageObj={appStorageObj}/>
-            <BrainWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowUninstallProgressWindow={setShowUninstallProgressWindow} appStorageObj={appStorageObj}/>
-            <ConfigWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} setShowUninstallProgressWindow={setShowUninstallProgressWindow} appStorageObj={appStorageObj}/>
-          </main>
+          {showStartScreen ? <StartWindow setShowStartScreen={setShowStartScreen}/> : 
+            <>
+              <Nav selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} />
+              <main>
+                <InstalledPluginsWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} 
+                  setShowUninstallProgressWindow={setShowUninstallProgressWindow} 
+                  appStorageObj={appStorageObj}
+                />
+                <ManualUninstallWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem}
+                  setShowUninstallProgressWindow={setShowUninstallProgressWindow} appStorageObj={appStorageObj}
+                />
+                <BrainWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} 
+                  setShowUninstallProgressWindow={setShowUninstallProgressWindow} appStorageObj={appStorageObj}
+                />
+                <ConfigWindow selectedNavItem={selectedNavItem} setSelectedNavItem={setSelectedNavItem} 
+                  setShowUninstallProgressWindow={setShowUninstallProgressWindow} appStorageObj={appStorageObj}
+                />
+              </main>
+            </>
+          }
         </div>
       </DialogProvider>
     </KnowledgeProvider>

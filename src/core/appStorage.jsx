@@ -1,10 +1,10 @@
 import { default_selectedTab, appDefaultStorageObj } from "./appDefaults"
 import { useKnowledgeNoProvider } from "../utils/KnowledgeProvider"
 
-export function setAppStorageConf(key,value) {
+export function setAppStorage(conf,key,value) {
     let appStorage = localStorage.getItem('AppStorage')
     appStorage = JSON.parse(appStorage) ?? appDefaultStorageObj
-    appStorage.appConf[key] = value
+    appStorage[conf][key] = value
     localStorage.setItem('AppStorage',JSON.stringify(appStorage))
 }
 

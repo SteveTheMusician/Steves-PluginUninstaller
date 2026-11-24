@@ -1,0 +1,26 @@
+.buttonFolder {
+    outline: none;
+    box-shadow: 0px -4px 8px #ffffff inset,0px 4px 8px #00000033 inset;
+    border-radius: var(--border-radius-round);
+    overflow: hidden;
+    padding-right: 24px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #888
+}
+
+.buttonFolder button {
+    margin-right: 24px;
+}
+
+.buttonFolder button:active {
+    box-shadow: none;
+    background-color: transparent;
+    color: var(--color-active);
+}
+
+.buttonFolder-text {
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+}

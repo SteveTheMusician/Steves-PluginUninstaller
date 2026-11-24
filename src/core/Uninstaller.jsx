@@ -1,28 +1,19 @@
 import { invoke } from '@tauri-apps/api/core';
 import AppStorage from './appStorage';
 
-const userNameTest = "admin"
-export default async function Uninstaller(type,setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete) {
-    const appStorageObj = AppStorage()
+export default async function Uninstaller(type,setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete,appStorageObj) {
     const knowledgePublicPaths = pluginsKnowledge.knowledge.defaultPaths.public
-    const knowledgeUserPath = pluginsKnowledge.knowledge.defaultPaths.user
-    const knowledgeKnownApps = pluginsKnowledge.knowledge.knownApps;
-    const lStorage_removePluginTypes = appStorageObj.appConf.remove_pluginType
-    //Mok User name
-    
     const defaultUninstallPathNames =  []
     Object.keys(knowledgePublicPaths).map((path) => defaultUninstallPathNames.push(path))
-    
-    console.log('data: ',pluginsKnowledge, 'uninstalltype: ',type)
+
     setShowUninstallProgressWindow(true)
 
     if(type === 'manualuninstall') {
         let uninstallArray = await createUninstallObject(pluginsKnowledge.knowledge,appStorageObj,vstNameToDelete,'manualuninstall')
         for(let uninstallPath of uninstallArray) {
-            // let fileToDeleteCommon = knowledgePublicPaths[defaultPaths].user +  vstNameToDelete + knowledgePublicPaths[defaultUninstallPath].extension
-            // let fileToDeleteUser = knowledgeUserPath+userNameTest+fileToDeleteCommon
             try{
                 // delete executor
+                console.log('➡️ Send uninstall path: ',uninstallPath)
                 let deletePluginInCommon = await invoke('delete_file', { path: uninstallPath});
                 console.log('Delete Executor: ',uninstallPath, deletePluginInCommon)
 
@@ -38,15 +29,13 @@ async function createUninstallObject(pluginsKnowledge,appStorageObj,vstNameToDel
     let uninstallArray = []
     const knowledgePublicPath = pluginsKnowledge.defaultPaths.public
     let knowledgeUserPath = pluginsKnowledge.defaultPaths.user
-    knowledgeUserPath = knowledgeUserPath.replace('{user}',userNameTest)
-    const lstorage_removePluginNames = appStorageObj.appConf.remove_pluginType
-    lstorage_removePluginNames.forEach(vstname => {
+    knowledgeUserPath = knowledgeUserPath.replace('{user}',appStorageObj.user.username)
+    const removePluginTypes = appStorageObj.appConf.remove_pluginType
+    removePluginTypes.forEach(vstname => {
         let vstFolder = pluginsKnowledge.plugIns[vstname].folder
         let vstExtension = pluginsKnowledge.plugIns[vstname].extension
         uninstallArray.push(knowledgePublicPath+vstFolder+vstNameToDelete+vstExtension)
         uninstallArray.push(knowledgeUserPath+vstFolder+vstNameToDelete+vstExtension)
-
-        
     });
     return uninstallArray    
 

@@ -1,15 +1,20 @@
 import './Options.css'
 import classNames from 'classnames';
 
-export default function OptionsEmpty({label,sublabel,classes,children}){
+export default function OptionsEmpty({label,sublabel,classes,requiered, requieredText, isValid, children}){
     return(
-        <div className={classNames('Options-Container flex ',classes)}>
-            <div className="Options-ContentLeft">
-                <p className="optionTitle">{label}</p>
-                <p className='sublabel'>{sublabel}</p>
+        <div className={classNames('Options-Container ',classes)}>
+            <div className='Options-Container-Main flex'>
+                <div className="Options-ContentLeft">
+                    <p className="optionTitle">{label} {requiered ? ' *' : null}</p>
+                    <p className='sublabel'>{sublabel}</p>
+                </div>
+                <div className="Options-ContentRight dFlex">
+                    {children}
+                </div>
             </div>
-            <div className="Options-ContentRight dFlex">
-                {children}
+            <div className='Options-Container-ErrorText'>
+                {requiered ? <p className={classNames('text-requieredError', isValid === false ? null : 'dNone')}>{requieredText}</p> : null }
             </div>
         </div>
     );

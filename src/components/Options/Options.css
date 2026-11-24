@@ -3,11 +3,14 @@
     padding-bottom: 2px;
 }
 .Options-Container {
-    justify-content: space-between;
     border-radius: var(--border-radius-small);
     padding: 12px;
     outline: 1px solid #ddd;
     margin: 12px 0px;
+}
+
+.Options-Container-Main {
+    justify-content: space-between;
     align-items: flex-start;
 }
 
@@ -21,6 +24,7 @@
     padding-left: 12px;
     flex-wrap: wrap;
     padding-top: 8px;
+    padding-bottom: 8px;
     justify-content: flex-end;
 }
 
