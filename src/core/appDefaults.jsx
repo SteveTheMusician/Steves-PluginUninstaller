@@ -9,7 +9,8 @@ export const appDefaultStorageObj = {
     "user":{
         "username":"",
         "useralias":"", 
-        "userhome": ""
+        "userhome": "",
+        "userdaw": ""
     }, 
     "appConf":{
         "selectedTab":"",

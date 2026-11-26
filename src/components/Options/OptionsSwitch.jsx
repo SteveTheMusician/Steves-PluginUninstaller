@@ -1,9 +1,10 @@
 import './Options.css'
 import { Switch } from '../molecules/molecules.import';
+import classNames from 'classnames';
 
-export default function OptionsSwitch({label,sublabel,type,id,name}){
+export default function OptionsSwitch({label,sublabel,type,id,name, isValid}){
     return(
-        <div className='Options-Container OptionsSwitch-Container flex'>
+        <div className={classNames('Options-Container OptionsSwitch-Container flex',isValid === false ? 'Options-Container--inValid': null)}>
             <div className="Options-ContentLeft">
                 <p className="optionTitle">{label}</p>
                 <p className='sublabel'>{sublabel}</p>

@@ -14,7 +14,7 @@ For Android development, run:
   npm run tauri android dev
 
 For iOS development, run:
-  npm run tauri ios dev
+  sudo npm run tauri dev
 
 # Development
 npm run tauri dev

@@ -5,11 +5,12 @@ import { useKnowledge } from "../../../utils/KnowledgeProvider";
 import Window from '../../Window/Window'
 import Box from '../../Box/Box';
 import { InputWithButton, OptionsSwitch, OptionsEmpty } from "../../components.import";
-import { Switch, Select, Input } from "../../molecules/molecules.import";
+import { Switch, Input } from "../../molecules/molecules.import";
 import { useDialog } from "../../../utils/DialogProvider";
 import Uninstaller from "../../../core/Uninstaller";
 import { setAppStorage } from "../../../core/appStorage";
 import AppStorage from "../../../core/appStorage";
+import { escapeHtml,shortString } from "../../../utils/functionHandlers";
 
 export default function ManualUninstallWindow({selectedNavItem,setSelectedNavItem,setShowUninstallProgressWindow,appStorageObj}) {
     
@@ -23,51 +24,66 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
     const windowLink = "tab_manualuninstall";
     const isVisible = selectedNavItem === windowLink;
     const [vstNameToDelete, setVstNameToDelete] = useState('')
+    const storage_uninstallVSTName = appStorageObj.appConf.remove_pluginType
+    const [vstTypeToDelete, setVstTypeToDelete] = useState(storage_uninstallVSTName)
     // const [showUninstallWarnDialog, setShowUninstallWarnDialog] = useState(false)
     // const [startManualDelete, setStartManualDelete] = useState(false)
+    // invalid visual states
+    const [showInputInvalid, setShowInputInvalid] = useState(true)
+    const [showCheckVstTypesInvalid, setShowCheckVstTypesInvalid] = useState(true)
     const defaultUninstallPathNames =  []
     Object.keys(knowledgeVstPlugins).map((vst) => {
         defaultUninstallPathNames.push(vst)
     })
-    const storage_uninstallVSTName = appStorageObj.appConf.remove_pluginType
-
-   const showDeleteWarning = () => {
+    const isInputValid = vstNameToDelete.length > 2
+    const isCheckVstTypeValid = vstTypeToDelete.length > 0
+    const isManualUninstallValid = isInputValid && isCheckVstTypeValid
+    
+    const showDeleteWarning = () => {
+        console.log('VST NAME', vstNameToDelete, 'VSTType',vstTypeToDelete)
         openDialog({
             dialogType: 'warnconfirm',
-            dialogText: 'Delete this plugin?',
+            dialogText: 'Want to delete '+shortString(vstNameToDelete)+' ?',
             dialogOkFunction: async () => {
-              console.log('🏁 starting uninstall...');
-              console.log('📀 uninstall data:', pluginsKnowledge, vstNameToDelete, storage_uninstallVSTName)
-              try{
-                await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete, appStorageObj);
-              }catch(e){
-                console.log(e)
-              }
+                console.log('🏁 starting uninstall...');
+                console.log('📀 uninstall data:', pluginsKnowledge, vstNameToDelete, vstTypeToDelete)
+                try{
+                    await Uninstaller('manualuninstall', setShowUninstallProgressWindow,pluginsKnowledge,vstNameToDelete, appStorageObj);
+                }catch(e){
+                    console.log(e)
+                }
             },
             dialogAboardFunction: () => {
-              console.log('aborted');
+                console.log('aborted');
             },
             dialogButtonTextWarnConfirm: 'Uninstall',
             dialogButtonTextWarnConfirmAboard: 'Cancel'
         });
     };
+    
+    const validateInputs = () => {
+        console.log('vstTypeToDelete',vstTypeToDelete,vstTypeToDelete.length,vstNameToDelete)
+        console.log('valid',isManualUninstallValid,'INITIAL STORAGE OBJ:',appStorageObj.appConf.remove_pluginType)
+        !isInputValid ? setShowInputInvalid(false) : setShowInputInvalid(true)
+        !isCheckVstTypeValid ? setShowCheckVstTypesInvalid(false) : setShowCheckVstTypesInvalid(true)
+        if(!isManualUninstallValid) return
+        showDeleteWarning()
+    }
 
     const changeVstName = event => {
-        setVstNameToDelete(event.target.value)
+        const vstNameValue = escapeHtml(event.target.value)
+        const name = vstNameValue.trim()
+        setVstNameToDelete(name)
     }
 
     const changeVstFileCheck = event => {
-        let checkBoxvalue = event.target.value
-        if(event.target.checked) {
-            storage_uninstallVSTName.push(checkBoxvalue)
-            setAppStorage('appConf','remove_pluginType',storage_uninstallVSTName)
-        } else {
-            const uninstallExtArrayIndex = storage_uninstallVSTName.indexOf(checkBoxvalue)
-            storage_uninstallVSTName.splice(uninstallExtArrayIndex, 1)
-            setAppStorage('appConf','remove_pluginType',storage_uninstallVSTName)
-        }
-        
-    }
+        const value = event.target.value;
+        const next = event.target.checked
+            ? [...vstTypeToDelete, value]                      
+            : vstTypeToDelete.filter(v => v !== value);        
+        setVstTypeToDelete(next);
+        setAppStorage('appConf', 'remove_pluginType', next);
+    };
 
     return (
         <Window isVisible={isVisible}>
@@ -78,8 +94,9 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
                         <InputWithButton id={'manualSearch'} classes={'inputData input-size--large'} 
                             placeholder={'E.g: FabFilter Pro-Q 4'} 
                             isDatalist={true} datalistId={'knownPluginsDataList'} datalistItems={knowledgeKnownApps}
-                            buttonId={'button_deleteManually'} buttonName={'Delete'} functionName={showDeleteWarning}
+                            buttonId={'button_deleteManually'} buttonName={'Delete'} functionName={validateInputs}
                             onChange={changeVstName}
+                            isValid={showInputInvalid}
                         />
                     </div>
                 </Box>
@@ -94,9 +111,10 @@ export default function ManualUninstallWindow({selectedNavItem,setSelectedNavIte
                 <Box classes={'box-manualUninstall-actions'} hiddenClass={'box-left--hidden'} trigger={isVisible} delay={3}>
                     <div className='option-container'>
                         <div className="options-headlineContainer dFlex">
-                            <h3>Remove</h3>
+                            <h3>What to delete</h3>
                         </div>
-                        <OptionsEmpty label={'PlugIn File-Types'} sublabel={'Select which file types you want to remove, based on your OS'} classes={'Options-Container-Checks'}>
+                        <OptionsEmpty label={'PlugIn File-Types'} sublabel={'Select which file types you want to remove, based on your OS'} 
+                            classes={'Options-Container-Checks'} isValid={showCheckVstTypesInvalid} requiered={true} requieredText={'Please select one option'}>
                             {
                                 defaultUninstallPathNames.map((VSTName) => {
                                     // let vstExt = knowledgeVstPlugins[VSTName].extension

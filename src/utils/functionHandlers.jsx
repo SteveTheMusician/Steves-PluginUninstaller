@@ -5,3 +5,7 @@ export function escapeHtml(string) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+
+export function shortString(string) {
+  return string.length > 20 ? string.slice(0, 20-1) + '...' : string
+}
